@@ -1,0 +1,1 @@
+CUDA_VISIBLE_DEVICES=7 python tests/benchmark_bruteforce.py --csv tests/test_data/example.csv

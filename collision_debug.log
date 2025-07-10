@@ -1,0 +1,111 @@
+2025-07-04 12:20:31,184 [INFO] 
+--- Processing Batch of 10 Test Cases ---
+2025-07-04 12:20:31,185 [INFO] Test Case 1: Models 1.obj vs 1.obj
+2025-07-04 12:20:31,187 [INFO] Model 2 Translation: [302.77919459258896, 22.24235971769255, 439.4953525208981]
+2025-07-04 12:20:31,189 [INFO] Expected Interference: Yes
+2025-07-04 12:20:31,192 [DEBUG] Attempting to load mesh: tests/test_data/1.obj
+2025-07-04 12:20:36,791 [INFO] Successfully loaded model 1.obj via CPU -> CUDA transfer
+2025-07-04 12:20:36,791 [INFO] Test Case 2: Models 1.obj vs 2.obj
+2025-07-04 12:20:36,794 [INFO] Model 2 Translation: [129.0930885477808, 207.46314850438333, 179.8773008460335]
+2025-07-04 12:20:36,796 [INFO] Expected Interference: Yes
+2025-07-04 12:20:36,800 [DEBUG] Attempting to load mesh: tests/test_data/2.obj
+2025-07-04 12:20:37,332 [INFO] Successfully loaded model 2.obj via CPU -> CUDA transfer
+2025-07-04 12:20:37,334 [INFO] Test Case 3: Models 1.obj vs 3.obj
+2025-07-04 12:20:37,335 [INFO] Model 2 Translation: [475.9475261847596, 197.79215422141155, 641.7896715125377]
+2025-07-04 12:20:37,337 [INFO] Expected Interference: No
+2025-07-04 12:20:37,339 [DEBUG] Attempting to load mesh: tests/test_data/3.obj
+2025-07-04 12:20:38,197 [INFO] Successfully loaded model 3.obj via CPU -> CUDA transfer
+2025-07-04 12:20:38,198 [INFO] Test Case 4: Models 1.obj vs 4.obj
+2025-07-04 12:20:38,201 [INFO] Model 2 Translation: [145.68327800303317, 442.06470851143087, 559.0372606924817]
+2025-07-04 12:20:38,203 [INFO] Expected Interference: No
+2025-07-04 12:20:38,205 [DEBUG] Attempting to load mesh: tests/test_data/4.obj
+2025-07-04 12:20:39,064 [INFO] Successfully loaded model 4.obj via CPU -> CUDA transfer
+2025-07-04 12:20:39,065 [INFO] Test Case 5: Models 1.obj vs 5.obj
+2025-07-04 12:20:39,068 [INFO] Model 2 Translation: [372.84332257680506, 122.35543957898038, 124.221526517656]
+2025-07-04 12:20:39,070 [INFO] Expected Interference: No
+2025-07-04 12:20:39,072 [DEBUG] Attempting to load mesh: tests/test_data/5.obj
+2025-07-04 12:20:39,256 [INFO] Successfully loaded model 5.obj via CPU -> CUDA transfer
+2025-07-04 12:20:39,258 [INFO] Test Case 6: Models 2.obj vs 1.obj
+2025-07-04 12:20:39,259 [INFO] Model 2 Translation: [513.6284683296062, 279.8888045270801, 358.4408345672482]
+2025-07-04 12:20:39,259 [INFO] Expected Interference: No
+2025-07-04 12:20:39,261 [INFO] Test Case 7: Models 2.obj vs 2.obj
+2025-07-04 12:20:39,263 [INFO] Model 2 Translation: [28.6899887846055, 331.9379866006033, 7.573014857662472]
+2025-07-04 12:20:39,266 [INFO] Expected Interference: No
+2025-07-04 12:20:39,271 [INFO] Test Case 8: Models 2.obj vs 3.obj
+2025-07-04 12:20:39,272 [INFO] Model 2 Translation: [560.7904670986819, 98.51662137571093, 206.16705799747825]
+2025-07-04 12:20:39,274 [INFO] Expected Interference: No
+2025-07-04 12:20:39,278 [INFO] Test Case 9: Models 2.obj vs 4.obj
+2025-07-04 12:20:39,280 [INFO] Model 2 Translation: [598.0685928559201, 559.995013397512, 270.7524501727596]
+2025-07-04 12:20:39,283 [INFO] Expected Interference: No
+2025-07-04 12:20:39,287 [INFO] Test Case 10: Models 2.obj vs 5.obj
+2025-07-04 12:20:39,289 [INFO] Model 2 Translation: [587.2970850449507, 253.25471188269208, 635.7689132242019]
+2025-07-04 12:20:39,292 [INFO] Expected Interference: No
+2025-07-04 12:20:42,241 [INFO] Batch Triangle Tensor Shapes: tri1=torch.Size([10, 45978, 3, 3]), tri2=torch.Size([10, 73350, 3, 3])
+2025-07-04 12:21:00,532 [INFO] Batch Results: Passed 10/10
+2025-07-04 12:21:00,533 [INFO] 
+--- Processing Batch of 10 Test Cases ---
+2025-07-04 12:21:00,535 [INFO] Test Case 11: Models 3.obj vs 1.obj
+2025-07-04 12:21:00,538 [INFO] Model 2 Translation: [160.02209517663033, 338.7590158434623, 460.7898028898185]
+2025-07-04 12:21:00,541 [INFO] Expected Interference: No
+2025-07-04 12:21:00,545 [INFO] Test Case 12: Models 3.obj vs 2.obj
+2025-07-04 12:21:00,547 [INFO] Model 2 Translation: [151.24470133302563, 687.3591333991388, 64.47652757483905]
+2025-07-04 12:21:00,550 [INFO] Expected Interference: No
+2025-07-04 12:21:00,553 [INFO] Test Case 13: Models 3.obj vs 3.obj
+2025-07-04 12:21:00,556 [INFO] Model 2 Translation: [463.9800142877531, 187.21950807706241, 358.0726010634137]
+2025-07-04 12:21:00,559 [INFO] Expected Interference: No
+2025-07-04 12:21:00,567 [INFO] Test Case 14: Models 3.obj vs 4.obj
+2025-07-04 12:21:00,567 [INFO] Model 2 Translation: [285.7476149548845, 274.94002578262405, 683.5350788083756]
+2025-07-04 12:21:00,570 [INFO] Expected Interference: No
+2025-07-04 12:21:00,576 [INFO] Test Case 15: Models 3.obj vs 5.obj
+2025-07-04 12:21:00,576 [INFO] Model 2 Translation: [163.18003072352806, 563.2478081174756, 438.12847730781806]
+2025-07-04 12:21:00,578 [INFO] Expected Interference: No
+2025-07-04 12:21:00,585 [INFO] Test Case 16: Models 4.obj vs 1.obj
+2025-07-04 12:21:00,585 [INFO] Model 2 Translation: [517.6483156385743, 42.41472976007522, 55.9129043833986]
+2025-07-04 12:21:00,587 [INFO] Expected Interference: No
+2025-07-04 12:21:00,592 [INFO] Test Case 17: Models 4.obj vs 2.obj
+2025-07-04 12:21:00,592 [INFO] Model 2 Translation: [133.79738359180536, 575.1931954097191, 673.2209426629236]
+2025-07-04 12:21:00,595 [INFO] Expected Interference: No
+2025-07-04 12:21:00,598 [INFO] Test Case 18: Models 4.obj vs 3.obj
+2025-07-04 12:21:00,602 [INFO] Model 2 Translation: [426.4576953474681, 77.32651533472387, 36.51828260803925]
+2025-07-04 12:21:00,604 [INFO] Expected Interference: Yes
+2025-07-04 12:21:00,607 [INFO] Test Case 19: Models 4.obj vs 4.obj
+2025-07-04 12:21:00,608 [INFO] Model 2 Translation: [459.9533893840851, 592.5839643902361, 625.5457123108224]
+2025-07-04 12:21:00,611 [INFO] Expected Interference: No
+2025-07-04 12:21:00,616 [INFO] Test Case 20: Models 4.obj vs 5.obj
+2025-07-04 12:21:00,616 [INFO] Model 2 Translation: [686.7896244430367, 421.23194101561114, 475.5416278778919]
+2025-07-04 12:21:00,618 [INFO] Expected Interference: No
+2025-07-04 12:21:00,814 [INFO] Batch Triangle Tensor Shapes: tri1=torch.Size([10, 73350, 3, 3]), tri2=torch.Size([10, 73350, 3, 3])
+2025-07-04 12:21:31,635 [INFO] Batch Results: Passed 10/10
+2025-07-04 12:21:31,637 [INFO] 
+--- Processing Batch of 10 Test Cases ---
+2025-07-04 12:21:31,643 [INFO] Test Case 21: Models 5.obj vs 1.obj
+2025-07-04 12:21:31,646 [INFO] Model 2 Translation: [267.06497308686284, 179.75394797870862, 384.63526552815404]
+2025-07-04 12:21:31,649 [INFO] Expected Interference: No
+2025-07-04 12:21:31,653 [INFO] Test Case 22: Models 5.obj vs 2.obj
+2025-07-04 12:21:31,655 [INFO] Model 2 Translation: [620.3697453945998, 551.5904015085426, 8.316643992109281]
+2025-07-04 12:21:31,658 [INFO] Expected Interference: No
+2025-07-04 12:21:31,660 [INFO] Test Case 23: Models 5.obj vs 3.obj
+2025-07-04 12:21:31,661 [INFO] Model 2 Translation: [460.79165436980776, 614.43009184161, 131.9007541125689]
+2025-07-04 12:21:31,664 [INFO] Expected Interference: No
+2025-07-04 12:21:31,673 [INFO] Test Case 24: Models 5.obj vs 4.obj
+2025-07-04 12:21:31,674 [INFO] Model 2 Translation: [653.9569689918079, 342.77322497162453, 456.9377490954764]
+2025-07-04 12:21:31,678 [INFO] Expected Interference: No
+2025-07-04 12:21:31,682 [INFO] Test Case 25: Models 5.obj vs 5.obj
+2025-07-04 12:21:31,684 [INFO] Model 2 Translation: [158.74271814859853, 134.38342844980386, 590.1195352885348]
+2025-07-04 12:21:31,687 [INFO] Expected Interference: No
+2025-07-04 12:21:31,691 [INFO] Test Case 26: Models 1.obj vs 1.obj
+2025-07-04 12:21:31,691 [INFO] Model 2 Translation: [476.5457801092078, 550.217061391233, 466.6797369585146]
+2025-07-04 12:21:31,691 [INFO] Expected Interference: No
+2025-07-04 12:21:31,695 [INFO] Test Case 27: Models 1.obj vs 2.obj
+2025-07-04 12:21:31,696 [INFO] Model 2 Translation: [289.99604474685435, 1.3858284605629088, 174.42149550686568]
+2025-07-04 12:21:31,699 [INFO] Expected Interference: No
+2025-07-04 12:21:31,700 [INFO] Test Case 28: Models 1.obj vs 3.obj
+2025-07-04 12:21:31,702 [INFO] Model 2 Translation: [148.26732875691263, 524.2964999390638, 562.2773494354277]
+2025-07-04 12:21:31,705 [INFO] Expected Interference: No
+2025-07-04 12:21:31,708 [INFO] Test Case 29: Models 1.obj vs 4.obj
+2025-07-04 12:21:31,711 [INFO] Model 2 Translation: [54.3208039628292, 588.381691236988, 159.54233612373378]
+2025-07-04 12:21:31,715 [INFO] Expected Interference: No
+2025-07-04 12:21:31,718 [INFO] Test Case 30: Models 1.obj vs 5.obj
+2025-07-04 12:21:31,721 [INFO] Model 2 Translation: [88.99000019238062, 535.0860058641803, 424.1732575347648]
+2025-07-04 12:21:31,723 [INFO] Expected Interference: No
+2025-07-04 12:21:31,921 [INFO] Batch Triangle Tensor Shapes: tri1=torch.Size([10, 45978, 3, 3]), tri2=torch.Size([10, 73350, 3, 3])

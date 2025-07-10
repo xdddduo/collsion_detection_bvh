@@ -1,0 +1,5 @@
+module load cuda/11.8
+export CUDA_HOME=$(dirname $(dirname $(which nvcc)))
+
+module load gcc/9.3.0
+export LD_LIBRARY_PATH=$(dirname $(gcc -print-libgcc-file-name)):$LD_LIBRARY_PATH
