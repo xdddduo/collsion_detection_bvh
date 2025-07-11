@@ -24,7 +24,7 @@ bvh_cache = {}
 bvh2_cache = {}
 
 for i in range(1, 6):
-    path = f"../{i}.obj"
+    path = f"tests/test_data/{i}.obj"
     aabbs = get_aabbs_from_obj(path)
     bvh = BVHWrapper()
     bvh.build(aabbs)
@@ -53,7 +53,7 @@ def evaluate_csv(csv_path):
 
             # Load bvh2 (once)
             if model2_id not in bvh2_cache:
-                path = f"../{model2_id}.obj"
+                path = f"tests/test_data/{model2_id}.obj"
                 aabbs = get_aabbs_from_obj(path)
                 bvh2 = BVHWrapper()
                 bvh2.build(aabbs)
@@ -101,4 +101,4 @@ def evaluate_csv(csv_path):
 # ---------- Run ----------
 
 if __name__ == "__main__":
-    evaluate_csv("/hpc_stor03/sjtu_home/xiuping.zhu/courses/ece450/design/example.csv")
+    evaluate_csv("tests/test_data/example.csv")

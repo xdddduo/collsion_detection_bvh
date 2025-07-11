@@ -1,0 +1,5 @@
+# ninja log v5
+0	1417	1752193244934541379	/home/baichuan/collsion_detection_bvh/build/temp.linux-x86_64-3.10/triangle/triangle_check.o	8fe117b8a1ae7886
+0	523	1752193836822770277	/home/baichuan/collsion_detection_bvh/build/temp.linux-x86_64-3.10/kitten/BVHwrapper.o	a47d25b528e55f31
+0	16521	1752193852809721915	/home/baichuan/collsion_detection_bvh/build/temp.linux-x86_64-3.10/kitten/lbvh.o	7fa95dbc8e102910
+0	18829	1752193855111714949	/home/baichuan/collsion_detection_bvh/build/temp.linux-x86_64-3.10/python/collision.o	90c03aa1f4ab9444
