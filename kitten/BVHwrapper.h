@@ -11,6 +11,9 @@ public:
     void build(const std::vector<Kitten::Bound<3, float>>& input);
     std::vector<glm::ivec2> query();
     std::vector<glm::ivec2> queryWith(const BVHWrapper& other);
+    
+    // NEW: Batched query method
+    std::vector<std::vector<glm::ivec2>> queryWithBatched(const std::vector<BVHWrapper*>& others);
 	
 	void selfCheck();
     void translate(const glm::vec3& offset);

@@ -1,5 +1,10 @@
 # ninja log v5
-0	1417	1752193244934541379	/home/baichuan/collsion_detection_bvh/build/temp.linux-x86_64-3.10/triangle/triangle_check.o	8fe117b8a1ae7886
-0	523	1752193836822770277	/home/baichuan/collsion_detection_bvh/build/temp.linux-x86_64-3.10/kitten/BVHwrapper.o	a47d25b528e55f31
-0	16521	1752193852809721915	/home/baichuan/collsion_detection_bvh/build/temp.linux-x86_64-3.10/kitten/lbvh.o	7fa95dbc8e102910
-0	18829	1752193855111714949	/home/baichuan/collsion_detection_bvh/build/temp.linux-x86_64-3.10/python/collision.o	90c03aa1f4ab9444
+0	518	1752638046113231775	/home/baichuan/collsion_detection_bvh/build/temp.linux-x86_64-3.10/kitten/BVHwrapper.o	a47d25b528e55f31
+1	1461	1752638047050229089	/home/baichuan/collsion_detection_bvh/build/temp.linux-x86_64-3.10/triangle/triangle_check.o	8fe117b8a1ae7886
+0	16553	1752638062136185903	/home/baichuan/collsion_detection_bvh/build/temp.linux-x86_64-3.10/kitten/lbvh.o	7fa95dbc8e102910
+1	18198	1752638063779181207	/home/baichuan/collsion_detection_bvh/build/temp.linux-x86_64-3.10/python/collision.o	90c03aa1f4ab9444
+10	740	1752641239195101571	/home/baichuan/collsion_detection_bvh/build/temp.linux-x86_64-3.10/kitten/BVHwrapper.o	a47d25b528e55f31
+10	16831	1752641255321053450	/home/baichuan/collsion_detection_bvh/build/temp.linux-x86_64-3.10/kitten/lbvh.o	7fa95dbc8e102910
+10	693	1752641816349481182	/home/baichuan/collsion_detection_bvh/build/temp.linux-x86_64-3.10/kitten/BVHwrapper.o	a47d25b528e55f31
+10	18694	1752641834336433004	/home/baichuan/collsion_detection_bvh/build/temp.linux-x86_64-3.10/python/collision.o	90c03aa1f4ab9444
+10	16102	1752643689849402726	/home/baichuan/collsion_detection_bvh/build/temp.linux-x86_64-3.10/kitten/lbvh.o	7fa95dbc8e102910

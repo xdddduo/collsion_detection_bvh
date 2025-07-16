@@ -87,7 +87,15 @@ py::class_<BVHWrapper> bind_bvh(py::module &m) {
             self.translate(glm::vec3(offset[0], offset[1], offset[2]));
         })
 
-        .def("selfCheck", &BVHWrapper::selfCheck);
+        .def("selfCheck", &BVHWrapper::selfCheck)
+        
+        .def("query_with_batched", [](BVHWrapper &self, py::list others_list) {
+            std::vector<BVHWrapper*> others;
+            for (auto item : others_list) {
+                others.push_back(item.cast<BVHWrapper*>());
+            }
+            return self.queryWithBatched(others);
+        });
 }
 
 // ========== 3. Python Module Entry ========== //

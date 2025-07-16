@@ -319,6 +319,98 @@ namespace Kitten {
 			}
 #undef DISPATCH_QUERY
 		}
+
+		// ========== BATCHED BVH QUERY KERNEL ========== //
+		
+		// Batched BVH query kernel that processes k*m threads
+		// where k = number of tests, m = number of AABBs per BVH2
+		__global__ void batchedBVHQueryKernel(
+			ivec2* results,           // [k * max_results_per_test]
+			int* result_counts,       // [k] - count per test
+			int maxResPerTest,        // Maximum results per test
+			const LBVH::node* bvh1_nodes,     // First BVH structure
+			const uint32_t* bvh1_objIDs,      // First BVH object IDs
+			const Bound<3, float>* bvh2_aabbs, // [k * m] - all AABBs from all BVH2s
+			const int* bvh2_sizes,            // [k] - number of AABBs per BVH2
+			const int k,              // Number of tests
+			const int max_m           // Maximum number of AABBs per BVH2
+		) {
+			int global_tid = threadIdx.x + blockIdx.x * blockDim.x;
+			int test_id = global_tid / max_m;
+			int aabb_id = global_tid % max_m;
+			
+			if (test_id >= k || aabb_id >= bvh2_sizes[test_id]) return;
+			
+			// Get the AABB for this thread's test and AABB
+			const Bound<3, float>& queryAABB = bvh2_aabbs[test_id * max_m + aabb_id];
+			
+			// Each thread traverses BVH1 for its assigned AABB
+			// This is similar to the single query kernel but for one specific AABB
+			
+			// Stack for tree traversal (simplified version)
+			uint32_t stack[32];
+			uint32_t* stackPtr = stack;
+			*(stackPtr++) = 0;  // Start from root
+			
+			// Local results for this thread
+			ivec2 local_results[16];  // Small local buffer
+			int local_count = 0;
+			
+			while (stackPtr != stack && local_count < 16) {
+				uint32_t nodeIdx = *(--stackPtr);  // Pop
+				bool isLeaf = nodeIdx & 0x80000000;
+				nodeIdx = nodeIdx & 0x7FFFFFFF;
+				
+				if (isLeaf) {
+					// Check if this leaf AABB intersects with our query AABB
+					const Bound<3, float>& leafAABB = bvh2_aabbs[test_id * max_m + nodeIdx];
+					if (queryAABB.intersects(leafAABB)) {
+						int objId1 = bvh1_objIDs[nodeIdx];
+        				int objId2 = aabb_id;
+
+						local_results[local_count++] = ivec2(objId1, objId2);					}
+				} else {
+					auto node = bvh1_nodes[nodeIdx];
+					
+					// Check if query AABB intersects with node bounds
+					if (node.bounds[0].intersects(queryAABB))
+						*(stackPtr++) = node.leftIdx;  // Push left child
+					
+					if (node.bounds[1].intersects(queryAABB))
+						*(stackPtr++) = node.rightIdx;  // Push right child
+				}
+			}
+			
+			// Write results to global memory
+			if (local_count > 0) {
+				int base_idx = test_id * maxResPerTest;
+				int write_idx = atomicAdd(&result_counts[test_id], local_count);
+				
+				if (write_idx + local_count <= maxResPerTest) {
+					for (int i = 0; i < local_count; i++) {
+						results[base_idx + write_idx + i] = local_results[i];
+					}
+				}
+			}
+		}
+		
+		// Launch function for batched BVH query
+		void launchBatchedBVHQueryKernel(
+			ivec2* results, int* result_counts, int maxResPerTest,
+			const LBVH::node* bvh1_nodes, const uint32_t* bvh1_objIDs,
+			const Bound<3, float>* bvh2_aabbs, const int* bvh2_sizes,
+			const int k, const int max_m) {
+			
+			int total_threads = k * max_m;
+			int block_size = 128;
+			int grid_size = (total_threads + block_size - 1) / block_size;
+			
+			batchedBVHQueryKernel<<<grid_size, block_size>>>(
+				results, result_counts, maxResPerTest,
+				bvh1_nodes, bvh1_objIDs, bvh2_aabbs, bvh2_sizes,
+				k, max_m
+			);
+		}
 	}
 
 #pragma endregion
@@ -434,6 +526,70 @@ namespace Kitten {
 
 		checkCudaErrors(cudaGetLastError());
 		return std::min((size_t)impl->d_flags[0], resSize);
+	}
+
+	size_t LBVH::queryBatched(ivec2* d_res, int* result_counts, size_t maxResPerTest,
+							 const std::vector<LBVH*>& others) const {
+		if (others.empty()) return 0;
+		
+		const int k = static_cast<int>(others.size());
+		
+		// Find maximum number of AABBs across all BVH2s
+		int max_m = 0;
+		for (const auto& other : others) {
+			max_m = std::max(max_m, static_cast<int>(other->numObjs));
+		}
+		
+		// Allocate device memory for BVH2 AABBs and sizes
+		Bound<3, float>* d_bvh2_aabbs = nullptr;
+		int* d_bvh2_sizes = nullptr;
+		
+		cudaMalloc(&d_bvh2_aabbs, sizeof(Bound<3, float>) * k * max_m);
+		cudaMalloc(&d_bvh2_sizes, sizeof(int) * k);
+		
+		// Copy BVH2 data to device
+		std::vector<int> h_bvh2_sizes(k);
+		for (int i = 0; i < k; i++) {
+			h_bvh2_sizes[i] = static_cast<int>(others[i]->numObjs);
+		}
+		cudaMemcpy(d_bvh2_sizes, h_bvh2_sizes.data(), sizeof(int) * k, cudaMemcpyHostToDevice);
+		
+		// Copy AABBs from all BVH2s
+		for (int i = 0; i < k; i++) {
+			cudaMemcpy(d_bvh2_aabbs + i * max_m, 
+					   thrust::raw_pointer_cast(others[i]->impl->d_objs),
+					   sizeof(Bound<3, float>) * others[i]->numObjs, 
+					   cudaMemcpyDeviceToDevice);
+		}
+		
+		// Initialize result counts to zero
+		cudaMemset(result_counts, 0, sizeof(int) * k);
+		
+		// Launch batched kernel
+		LBVHKernels::launchBatchedBVHQueryKernel(
+			d_res, result_counts, static_cast<int>(maxResPerTest),
+			thrust::raw_pointer_cast(impl->d_nodes.data()),
+			thrust::raw_pointer_cast(impl->d_objIDs.data()),
+			d_bvh2_aabbs, d_bvh2_sizes, k, max_m
+		);
+		
+		checkCudaErrors(cudaGetLastError());
+		
+		// Cleanup
+		cudaFree(d_bvh2_aabbs);
+		cudaFree(d_bvh2_sizes);
+		
+		// Return total results (we'll need to sum result_counts)
+		int* h_result_counts = new int[k];
+		cudaMemcpy(h_result_counts, result_counts, sizeof(int) * k, cudaMemcpyDeviceToHost);
+		
+		int total_results = 0;
+		for (int i = 0; i < k; i++) {
+			total_results += h_result_counts[i];
+		}
+		
+		delete[] h_result_counts;
+		return total_results;
 	}
 
 #pragma endregion

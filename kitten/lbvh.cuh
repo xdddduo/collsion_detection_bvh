@@ -80,6 +80,18 @@ namespace Kitten {
 		/// <returns>The number of unique collision pairs written</returns>
 		size_t query(ivec2* d_res, size_t resSize) const;
 
+		/// <summary>
+		/// Tests this BVH against multiple other BVHs in a single batched operation.
+		/// Processes k*m threads where k = number of tests, m = max AABBs per BVH2.
+		/// </summary>
+		/// <param name="d_res">Device pointer with results for all tests [k * maxResPerTest]</param>
+		/// <param name="result_counts">Device pointer with result counts per test [k]</param>
+		/// <param name="maxResPerTest">Maximum results per test</param>
+		/// <param name="others">Vector of other BVHs to test against</param>
+		/// <returns>Total number of results across all tests</returns>
+		size_t queryBatched(ivec2* d_res, int* result_counts, size_t maxResPerTest,
+						   const std::vector<LBVH*>& others) const;
+
 		// Does a self check of the BVH structure for debugging purposes.
 		void bvhSelfCheck() const;
 	};
